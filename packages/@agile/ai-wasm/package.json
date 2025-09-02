@@ -1,0 +1,83 @@
+{
+  "name": "@agile/ai-wasm",
+  "version": "0.0.1",
+  "description": "WASM-accelerated AI inference with 3x+ performance improvement",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./acceleration": {
+      "import": "./dist/acceleration/index.esm.js",
+      "require": "./dist/acceleration/index.js",
+      "types": "./dist/acceleration/index.d.ts"
+    },
+    "./compilation": {
+      "import": "./dist/compilation/index.esm.js",
+      "require": "./dist/compilation/index.js",
+      "types": "./dist/compilation/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "build:wasm": "wasm-pack build --target web --out-dir wasm-dist",
+    "dev": "tsup --watch",
+    "test": "vitest",
+    "test:coverage": "vitest --coverage",
+    "test:ui": "vitest --ui",
+    "bench": "vitest --run --config vitest.bench.config.ts",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --ext .ts,.tsx --fix",
+    "clean": "rm -rf dist wasm-dist"
+  },
+  "keywords": [
+    "ai",
+    "wasm",
+    "webassembly",
+    "acceleration",
+    "inference",
+    "performance",
+    "tensorflow",
+    "onnx",
+    "simd",
+    "machine-learning"
+  ],
+  "author": "Agile-Programmers Team",
+  "license": "MIT",
+  "dependencies": {
+    "@agile/core": "workspace:*",
+    "@agile/ai-core": "workspace:*",
+    "@agile/wasm-rust": "workspace:*",
+    "@tensorflow/tfjs": "^4.15.0",
+    "@tensorflow/tfjs-backend-wasm": "^4.15.0",
+    "onnxruntime-web": "^1.16.3",
+    "react": "^18.2.0 || ^19.0.0",
+    "zod": "^3.22.4",
+    "uuid": "^9.0.1",
+    "eventemitter3": "^5.0.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/uuid": "^9.0.7",
+    "@testing-library/jest-dom": "^6.1.4",
+    "@vitest/coverage-v8": "^1.2.0",
+    "@vitest/ui": "^1.2.0",
+    "eslint": "^8.57.0",
+    "jsdom": "^23.0.1",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3",
+    "vitest": "^1.2.0",
+    "wasm-pack": "^0.12.1"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

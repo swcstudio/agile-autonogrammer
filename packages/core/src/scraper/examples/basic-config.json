@@ -1,0 +1,69 @@
+{
+  "url": "https://example.com",
+  "engine": "cheerio",
+  "output": {
+    "format": "json",
+    "filePath": "./results/scraped-data.json",
+    "prettyPrint": true,
+    "includeMetadata": true
+  },
+  "request": {
+    "timeout": 30000,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+    "headers": {
+      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+      "Accept-Language": "en-US,en;q=0.5"
+    }
+  },
+  "extraction": {
+    "rules": [
+      {
+        "name": "title",
+        "selector": "title",
+        "attribute": "text",
+        "type": "text",
+        "required": true
+      },
+      {
+        "name": "description",
+        "selector": "meta[name=\"description\"]",
+        "attribute": "content",
+        "type": "text"
+      },
+      {
+        "name": "headings",
+        "selector": "h1, h2, h3",
+        "attribute": "text",
+        "type": "text",
+        "multiple": true
+      },
+      {
+        "name": "links",
+        "selector": "a[href]",
+        "attribute": "href",
+        "type": "url",
+        "multiple": true
+      }
+    ],
+    "textProcessing": {
+      "trim": true,
+      "normalizeWhitespace": true,
+      "stripHtml": false,
+      "decodeEntities": true
+    }
+  },
+  "rateLimit": {
+    "delay": 1000,
+    "requestsPerSecond": 1
+  },
+  "retry": {
+    "maxRetries": 3,
+    "baseDelay": 1000,
+    "backoffMultiplier": 2,
+    "maxDelay": 10000
+  },
+  "monitoring": {
+    "logLevel": "info",
+    "metrics": true
+  }
+}

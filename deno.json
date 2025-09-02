@@ -1,0 +1,62 @@
+{
+  "name": "katalyst-core",
+  "version": "0.1.0",
+  "tasks": {
+    "build": "turbo run build",
+    "build:wasm": "deno run --allow-all ./scripts/build-wasm-modules.ts",
+    "build:deno": "deno run --allow-all ./scripts/build-deno-wasm.ts",
+    "dev": "turbo run dev",
+    "dev:wasm": "deno run --allow-all --watch ./scripts/dev-wasm-server.ts",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "test:wasm": "deno test --allow-all ./tests/wasm/",
+    "typecheck": "turbo run typecheck",
+    "clean": "turbo run clean && rm -rf wasm-modules/dist",
+    "setup": "deno run --allow-all ./scripts/setup-multithreading.ts && deno install",
+    "install": "deno install && bun install --fallback",
+    "deploy:vercel": "deno run --allow-all ./scripts/deploy-vercel.ts"
+  },
+  "imports": {
+    "@katalyst/core": "./packages/core/mod.ts",
+    "@katalyst/design-system": "./packages/design-system/mod.ts",
+    "@katalyst/multithreading": "./packages/multithreading/mod.ts",
+    "@katalyst/mobile": "./packages/mobile/mod.ts",
+    "@katalyst/desktop": "./packages/desktop/mod.ts",
+    "@katalyst/metaverse": "./packages/metaverse/mod.ts",
+    "@katalyst/pwa": "./packages/pwa/mod.ts",
+    "@katalyst/build-system": "./packages/build-system/mod.ts",
+    "@katalyst/utils": "./packages/utils/mod.ts",
+    "@katalyst/hooks": "./packages/hooks/mod.ts",
+    "@katalyst/integrations": "./packages/integrations/mod.ts",
+    "@katalyst/webxr": "./packages/webxr/mod.ts",
+    "@katalyst/payments": "./packages/payments/mod.ts",
+    "@katalyst/ai": "./packages/ai/mod.ts",
+    "@katalyst/test-utils": "./packages/test-utils/mod.ts",
+    "@katalyst/wasm-runtime": "./wasm-modules/dist/",
+    "@katalyst/wasm-bindings": "./packages/wasm-bindings/mod.ts",
+    "@katalyst/runtime-utils": "./packages/runtime-utils/mod.ts"
+  },
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true
+  },
+  "fmt": {
+    "useTabs": false,
+    "lineWidth": 100,
+    "indentWidth": 2,
+    "semiColons": true,
+    "singleQuote": true,
+    "proseWrap": "preserve"
+  },
+  "lint": {
+    "rules": {
+      "tags": ["recommended"],
+      "include": ["ban-untagged-todo"]
+    }
+  }
+}

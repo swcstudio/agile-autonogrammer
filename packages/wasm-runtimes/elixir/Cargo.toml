@@ -1,0 +1,54 @@
+[package]
+name = "katalyst-elixir-wasm"
+version = "1.0.0"
+edition = "2021"
+authors = ["Katalyst Team <team@katalyst.dev>"]
+license = "MIT"
+repository = "https://github.com/katalyst/framework"
+description = "WebAssembly build of Katalyst Elixir runtime with Phoenix integration"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+# Core functionality
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+uuid = { version = "1.0", features = ["v4", "wasm-bindgen"] }
+
+# WebAssembly dependencies
+wasm-bindgen = "0.2"
+wasm-bindgen-futures = "0.4"
+js-sys = "0.3"
+web-sys = "0.3"
+serde-wasm-bindgen = "0.6"
+console_error_panic_hook = "0.1"
+
+# Async and networking
+tokio = { version = "1.0", features = ["rt", "sync", "time"] }
+futures = "0.3"
+
+[dependencies.web-sys]
+version = "0.3"
+features = [
+  "console",
+  "WebSocket",
+  "MessageEvent",
+  "CloseEvent",
+  "ErrorEvent",
+  "BinaryType",
+  "Blob",
+  "FileReader",
+  "EventTarget",
+  "Event",
+]
+
+[features]
+default = []
+debug = []
+
+[profile.release]
+opt-level = "s"
+lto = true
+codegen-units = 1
+panic = "abort"

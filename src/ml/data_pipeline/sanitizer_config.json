@@ -1,0 +1,183 @@
+{
+  "sanitizer_name": "GitHub Data Sanitization Pipeline",
+  "version": "1.0.0",
+  "description": "Comprehensive data sanitization for ML/LLM training from GitHub issues",
+  
+  "processing_config": {
+    "min_body_length": 50,
+    "max_body_length": 10000,
+    "parallel_processing": true,
+    "max_threads": 4,
+    "batch_size": 1000
+  },
+  
+  "security_config": {
+    "strict_security": true,
+    "allow_research_use": true,
+    "block_malicious_urls": true,
+    "block_executable_content": true,
+    "security_violation_threshold": 0.8
+  },
+  
+  "license_config": {
+    "require_permissive_license": true,
+    "allowed_licenses": [
+      "MIT",
+      "Apache-2.0", 
+      "BSD-3-Clause",
+      "BSD-2-Clause",
+      "ISC",
+      "GPL-3.0",
+      "GPL-2.0"
+    ],
+    "blocked_licenses": [
+      "Commercial",
+      "Proprietary",
+      "CC-BY-NC"
+    ],
+    "allow_unknown_license": false
+  },
+  
+  "quality_config": {
+    "min_quality_score": 0.5,
+    "min_safety_score": 0.8,
+    "require_code_snippets": false,
+    "require_solutions": true,
+    "min_description_words": 20
+  },
+  
+  "privacy_config": {
+    "remove_pii": true,
+    "remove_credentials": true,
+    "remove_file_paths": true,
+    "anonymize_users": true,
+    "redaction_placeholder_style": "bracketed"
+  },
+  
+  "content_filtering": {
+    "block_spam": true,
+    "block_duplicate_content": true,
+    "min_technical_content": 0.3,
+    "require_issue_closure": true,
+    "filter_help_requests": false
+  },
+  
+  "banned_repositories": [
+    "example/spam-repo",
+    "test/malicious-content",
+    "known/bad-actor-repo"
+  ],
+  
+  "banned_users": [
+    "spam-user",
+    "known-bad-actor",
+    "automated-spammer"
+  ],
+  
+  "categorization": {
+    "auto_categorize": true,
+    "difficulty_estimation": true,
+    "extract_solutions": true,
+    "extract_test_cases": true,
+    "tag_filtering": true
+  },
+  
+  "security_patterns": {
+    "sql_injection": {
+      "enabled": true,
+      "severity": "high",
+      "block_on_detection": true
+    },
+    "xss": {
+      "enabled": true,
+      "severity": "high", 
+      "block_on_detection": true
+    },
+    "command_injection": {
+      "enabled": true,
+      "severity": "critical",
+      "block_on_detection": true
+    },
+    "path_traversal": {
+      "enabled": true,
+      "severity": "medium",
+      "block_on_detection": false
+    },
+    "code_execution": {
+      "enabled": true,
+      "severity": "critical",
+      "block_on_detection": true
+    },
+    "sensitive_data_exposure": {
+      "enabled": true,
+      "severity": "high",
+      "block_on_detection": false
+    }
+  },
+  
+  "pii_detection": {
+    "email_addresses": {
+      "enabled": true,
+      "redaction_method": "full",
+      "placeholder": "[EMAIL_REDACTED]"
+    },
+    "phone_numbers": {
+      "enabled": true,
+      "redaction_method": "full",
+      "placeholder": "[PHONE_REDACTED]"
+    },
+    "ip_addresses": {
+      "enabled": true,
+      "redaction_method": "partial",
+      "placeholder": "[IP_REDACTED]"
+    },
+    "personal_names": {
+      "enabled": true,
+      "redaction_method": "partial",
+      "placeholder": "[NAME_REDACTED]"
+    },
+    "addresses": {
+      "enabled": true,
+      "redaction_method": "full",
+      "placeholder": "[ADDRESS_REDACTED]"
+    },
+    "financial_data": {
+      "enabled": true,
+      "redaction_method": "full",
+      "placeholder": "[FINANCIAL_REDACTED]"
+    }
+  },
+  
+  "code_sanitization": {
+    "remove_hardcoded_secrets": true,
+    "remove_sensitive_comments": true,
+    "validate_code_safety": true,
+    "block_dangerous_functions": true,
+    "extract_clean_examples": true
+  },
+  
+  "output_format": {
+    "include_provenance": true,
+    "include_sanitization_log": true,
+    "include_quality_metrics": true,
+    "include_safety_scores": true,
+    "export_formats": ["json", "jsonl", "parquet"],
+    "anonymize_ids": true
+  },
+  
+  "reporting": {
+    "generate_detailed_report": true,
+    "include_statistics": true,
+    "include_violation_breakdown": true,
+    "include_quality_distribution": true,
+    "export_sanitization_log": true
+  },
+  
+  "validation": {
+    "validate_output_quality": true,
+    "sample_validation_rate": 0.1,
+    "quality_check_threshold": 0.7,
+    "safety_check_threshold": 0.9,
+    "generate_validation_report": true
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "@katalyst/design-system",
+  "version": "0.1.0",
+  "exports": {
+    ".": "./mod.ts",
+    "./ui": "./src/ui/mod.ts",
+    "./blocks": "./src/blocks/mod.ts"
+  },
+  "imports": {
+    "react": "npm:react@^19.0.0",
+    "react-dom": "npm:react-dom@^19.0.0",
+    "clsx": "npm:clsx@^2.0.0",
+    "tailwind-merge": "npm:tailwind-merge@^2.0.0",
+    "framer-motion": "npm:framer-motion@^11.0.0",
+    "@radix-ui/": "npm:/@radix-ui/"
+  },
+  "tasks": {
+    "build": "deno run --allow-all build.ts",
+    "dev": "deno run --allow-all --watch dev.ts",
+    "test": "deno test --allow-all",
+    "lint": "deno lint",
+    "fmt": "deno fmt"
+  },
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "lib": ["dom", "dom.iterable", "esnext"]
+  }
+}

@@ -1,0 +1,32 @@
+[package]
+name = "katalyst-elixir-runtime-wasm"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "WebAssembly build of Katalyst Elixir runtime"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+katalyst-elixir-runtime = { path = "../../src/elixir-runtime", features = ["wasm-web"] }
+
+# WebAssembly dependencies
+wasm-bindgen = { workspace = true }
+wasm-bindgen-futures = { workspace = true }
+js-sys = { workspace = true }
+web-sys = { workspace = true }
+serde-wasm-bindgen = { workspace = true }
+console_error_panic_hook = { workspace = true }
+
+[dependencies.web-sys]
+workspace = true
+features = [
+  "console",
+  "WebSocket",
+  "MessageEvent",
+  "CloseEvent",
+  "ErrorEvent",
+]

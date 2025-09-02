@@ -1,0 +1,51 @@
+{
+  "name": "@katalyst/api",
+  "version": "1.0.0",
+  "description": "Shared API layer for Katalyst microfrontends",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./ai": {
+      "import": "./dist/ai/index.mjs",
+      "require": "./dist/ai/index.js",
+      "types": "./dist/ai/index.d.ts"
+    },
+    "./edge": {
+      "import": "./dist/edge/index.mjs",
+      "require": "./dist/edge/index.js",
+      "types": "./dist/edge/index.d.ts"
+    },
+    "./trpc": {
+      "import": "./dist/trpc/index.mjs",
+      "require": "./dist/trpc/index.js",
+      "types": "./dist/trpc/index.d.ts"
+    },
+    "./webxr": {
+      "import": "./dist/webxr/index.mjs",
+      "require": "./dist/webxr/index.js",
+      "types": "./dist/webxr/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3",
+    "vitest": "^1.2.1"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
+  }
+}

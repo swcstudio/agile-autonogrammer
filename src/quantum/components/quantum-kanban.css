@@ -1,0 +1,130 @@
+/* Quantum Kanban Board Styles */
+
+.quantum-kanban-container {
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  position: relative;
+}
+
+.quantum-flow {
+  width: 100%;
+  height: 100%;
+}
+
+.quantum-background {
+  opacity: 0.3;
+}
+
+/* Quantum Legend Panel */
+.quantum-legend {
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 8px;
+  padding: 12px;
+  color: #e2e8f0;
+  backdrop-filter: blur(10px);
+}
+
+.legend-title {
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #a78bfa;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin: 4px 0;
+}
+
+.legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  margin-right: 8px;
+}
+
+.legend-color.superposition {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+}
+
+.legend-color.entangled {
+  background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+}
+
+.legend-color.collapsed {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+/* Entanglement Animation */
+@keyframes entangle-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(236, 72, 153, 0.3);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(236, 72, 153, 0.6);
+  }
+}
+
+/* Quantum State Transition */
+@keyframes quantum-transition {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Wave Function Animation */
+@keyframes wave-function {
+  0% {
+    transform: translateX(0) scaleY(1);
+  }
+  25% {
+    transform: translateX(10px) scaleY(1.1);
+  }
+  50% {
+    transform: translateX(0) scaleY(1);
+  }
+  75% {
+    transform: translateX(-10px) scaleY(0.9);
+  }
+  100% {
+    transform: translateX(0) scaleY(1);
+  }
+}
+
+/* React Flow Handle Customization */
+.quantum-handle {
+  width: 12px;
+  height: 12px;
+  background: #8b5cf6;
+  border: 2px solid #1e293b;
+}
+
+.quantum-handle:hover {
+  background: #a78bfa;
+  box-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
+}
+
+/* Quantum Measurement Effect */
+@keyframes measurement-collapse {
+  0% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2) rotate(180deg);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+    opacity: 1;
+  }
+}

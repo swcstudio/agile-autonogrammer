@@ -1,0 +1,52 @@
+{
+  "name": "@swcstudio/multithreading",
+  "version": "1.0.0",
+  "description": "Advanced multithreading system for React 19 with AI-focused thread lifecycle management, WebSocket monitoring, and subagent coordination through Rust-powered Crossbeam, Rayon, and Tokio",
+  "main": "wrapper.js",
+  "types": "wrapper.d.ts",
+  "napi": {
+    "binaryName": "swcstudio-multithreading",
+    "targets": [
+      "x86_64-pc-windows-msvc",
+      "x86_64-apple-darwin",
+      "x86_64-unknown-linux-gnu",
+      "x86_64-unknown-linux-musl",
+      "aarch64-unknown-linux-gnu",
+      "aarch64-apple-darwin",
+      "aarch64-pc-windows-msvc",
+      "aarch64-unknown-linux-musl",
+      "armv7-unknown-linux-gnueabihf",
+      "i686-pc-windows-msvc"
+    ]
+  },
+  "keywords": [
+    "multithreading",
+    "react",
+    "rust",
+    "rayon",
+    "tokio",
+    "crossbeam",
+    "ai",
+    "websocket",
+    "subagents",
+    "performance",
+    "concurrency"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@napi-rs/cli": "^3.0.1"
+  },
+  "scripts": {
+    "artifacts": "napi artifacts",
+    "build": "napi build --platform --release",
+    "build:debug": "napi build --platform",
+    "prepublishOnly": "napi prepublish -t npm",
+    "test": "node test.js",
+    "examples": "node examples.js",
+    "universal": "napi universal",
+    "version": "napi version"
+  },
+  "engines": {
+    "node": ">= 10"
+  }
+}

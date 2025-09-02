@@ -1,0 +1,39 @@
+{
+  "name": "@agile/threading",
+  "version": "1.0.0",
+  "description": "Katalyst-powered Rust+Elixir multithreading with AI-adaptive resource management",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./workers": {
+      "types": "./dist/workers/index.d.ts",
+      "import": "./dist/workers/index.mjs",
+      "require": "./dist/workers/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc && tsc-alias",
+    "dev": "tsc --watch",
+    "test": "vitest run",
+    "test:watch": "vitest watch",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@agile/types": "workspace:*",
+    "eventemitter3": "^5.0.1",
+    "nanoid": "^5.0.4",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "tsc-alias": "^1.8.8",
+    "vitest": "^1.2.0"
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "name": "@katalyst/ai-osx",
+  "version": "0.1.0",
+  "description": "AI-OSX: WebAssembly-based AI-native operating system built on Katalyst framework",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./kernel": {
+      "import": "./dist/kernel/index.esm.js",
+      "require": "./dist/kernel/index.js", 
+      "types": "./dist/kernel/index.d.ts"
+    },
+    "./terminal": {
+      "import": "./dist/terminal/index.esm.js",
+      "require": "./dist/terminal/index.js",
+      "types": "./dist/terminal/index.d.ts"
+    },
+    "./editor": {
+      "import": "./dist/editor/index.esm.js",
+      "require": "./dist/editor/index.js",
+      "types": "./dist/editor/index.d.ts"
+    },
+    "./cognitive": {
+      "import": "./dist/cognitive/index.esm.js",
+      "require": "./dist/cognitive/index.js",
+      "types": "./dist/cognitive/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --ext .ts,.tsx --fix",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "ai-osx",
+    "webassembly",
+    "operating-system",
+    "ai-native",
+    "katalyst",
+    "terminal",
+    "editor",
+    "development-environment"
+  ],
+  "author": "Katalyst Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/katalyst-team/katalyst-core",
+    "directory": "packages/ai-osx"
+  },
+  "dependencies": {
+    "@katalyst/hooks": "workspace:*",
+    "@katalyst/security-ai": "workspace:*",
+    "@katalyst/multithreading": "workspace:*",
+    "@katalyst/ai": "workspace:*",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "zustand": "^5.0.0",
+    "immer": "^10.1.1",
+    "clsx": "^2.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "tsup": "^8.2.4",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.1",
+    "@vitest/ui": "^2.1.1",
+    "@vitest/coverage-v8": "^2.1.1",
+    "eslint": "^9.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

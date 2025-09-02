@@ -1,0 +1,166 @@
+{
+  "$schema": "../node_modules/@tauri-apps/cli/schema.json",
+  "build": {
+    "beforeBuildCommand": "deno run --allow-all scripts/unified-runner.ts --task build --platform desktop",
+    "beforeDevCommand": "deno run --allow-all scripts/unified-runner.ts --task dev --platform desktop",
+    "devPath": "http://localhost:20007",
+    "distDir": "../dist/desktop",
+    "withGlobalTauri": true,
+    "frontendDist": "../dist/desktop"
+  },
+  "package": {
+    "productName": "Katalyst Desktop",
+    "version": "1.0.0"
+  },
+  "tauri": {
+    "allowlist": {
+      "all": false,
+      "shell": {
+        "all": false,
+        "open": true
+      },
+      "window": {
+        "all": false,
+        "close": true,
+        "hide": true,
+        "show": true,
+        "maximize": true,
+        "minimize": true,
+        "unmaximize": true,
+        "unminimize": true,
+        "startDragging": true
+      },
+      "fs": {
+        "all": true,
+        "scope": ["$APPDATA/*", "$DOCUMENT/*", "$DESKTOP/*", "$DOWNLOAD/*"]
+      },
+      "dialog": {
+        "all": true,
+        "ask": true,
+        "confirm": true,
+        "message": true,
+        "open": true,
+        "save": true
+      },
+      "clipboard": {
+        "all": true,
+        "readText": true,
+        "writeText": true
+      },
+      "globalShortcut": {
+        "all": true
+      },
+      "notification": {
+        "all": true
+      },
+      "app": {
+        "all": true,
+        "show": true,
+        "hide": true
+      },
+      "path": {
+        "all": true
+      },
+      "os": {
+        "all": true
+      }
+    },
+    "bundle": {
+      "active": true,
+      "targets": "all",
+      "identifier": "com.katalyst.desktop",
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.icns",
+        "icons/icon.ico"
+      ],
+      "resources": ["resources/*"],
+      "externalBin": [],
+      "copyright": "Copyright © 2025 Katalyst Framework",
+      "category": "DeveloperTool",
+      "shortDescription": "Katalyst React Framework Desktop App",
+      "longDescription": "A unified React framework for building cross-platform desktop, mobile, and WebXR applications with Rust performance and modern web technologies.",
+      "appimage": {
+        "bundleMediaFramework": true
+      },
+      "deb": {
+        "depends": ["libwebkit2gtk-4.0-37", "libgtk-3-0"]
+      },
+      "macOS": {
+        "frameworks": ["WebKit"],
+        "minimumSystemVersion": "10.13",
+        "exceptionDomain": "localhost"
+      },
+      "windows": {
+        "certificateThumbprint": null,
+        "digestAlgorithm": "sha256",
+        "timestampUrl": ""
+      }
+    },
+    "security": {
+      "csp": "default-src 'self' 'unsafe-inline' data: asset: https://asset.localhost; connect-src 'self' https: http://localhost:* ws://localhost:*; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'"
+    },
+    "windows": [
+      {
+        "fullscreen": false,
+        "resizable": true,
+        "title": "Katalyst Desktop",
+        "width": 1400,
+        "height": 900,
+        "minWidth": 800,
+        "minHeight": 600,
+        "center": true,
+        "transparent": false,
+        "decorations": true,
+        "alwaysOnTop": false,
+        "skipTaskbar": false,
+        "theme": "auto",
+        "titleBarStyle": "Visible",
+        "hiddenTitle": false,
+        "acceptFirstMouse": false,
+        "tabbingIdentifier": "main",
+        "additionalBrowserArgs": "--enable-features=msWebOOUI,msPdfOOUI,msSmartScreenProtection",
+        "webSecurity": false
+      }
+    ],
+    "systemTray": {
+      "iconPath": "icons/icon.png",
+      "iconAsTemplate": true,
+      "menuOnLeftClick": false,
+      "tooltip": "Katalyst Desktop"
+    },
+    "macOSPrivateApi": true,
+    "withGlobalTauri": true,
+    "updater": {
+      "active": true,
+      "endpoints": [
+        "https://releases.katalyst.dev/desktop/{{target}}/{{arch}}/{{current_version}}"
+      ],
+      "dialog": true,
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDYxNTlFMjE1MjAyODBGNDgKUldUOU9mZDNmVjFUTGRXekF0aWliQUpLOWxzZzlJVGVLWGMvV1E0TmFKeXZCZWJQcjJaWGNjRG4K"
+    }
+  },
+  "plugins": {
+    "webview": {
+      "options": {
+        "webSecurity": false,
+        "allowScripts": true
+      }
+    },
+    "window-state": {
+      "filename": "window-state.json"
+    },
+    "global-shortcut": {},
+    "clipboard-manager": {},
+    "fs": {},
+    "dialog": {},
+    "shell": {},
+    "sql": {
+      "preload": ["migrations/*"]
+    },
+    "store": {},
+    "updater": {}
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "esModuleInterop": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": false,
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "checkJs": false,
+    "outDir": "dist",
+    "rootDir": "src",
+    "jsx": "react",
+    "declaration": false,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "@agile/core": ["./packages/@agile/core/src/index.ts"],
+      "@agile/core/*": ["./packages/@agile/core/src/*"],
+      "@agile/hooks": ["./packages/hooks/src/index.ts"],
+      "@agile/hooks/*": ["./packages/hooks/src/*"],
+      "@agile/ai": ["./packages/ai/src/index.ts"],
+      "@agile/ai/*": ["./packages/ai/src/*"],
+      "@agile/test-utils": ["./packages/test-utils/src/index.ts"],
+      "@agile/test-utils/*": ["./packages/test-utils/src/*"],
+      "*": ["node_modules/*", "src/types/*", "src/*"]
+    },
+    "types": ["bun-types", "node"],
+    "allowSyntheticDefaultImports": true,
+    "noEmitOnError": false,
+    "ignoreDeprecations": "5.0",
+    "useUnknownInCatchVariables": true,
+    "alwaysStrict": true,
+    "noErrorTruncation": true,
+    "noEmit": false,
+    "skipDefaultLibCheck": true,
+    "isolatedModules": true,
+    "allowUnreachableCode": true,
+    "allowUnusedLabels": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noPropertyAccessFromIndexSignature": false,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitOverride": true,
+    "plugins": [
+      {
+        "transform": "ts-transform-define",
+        "type": "config",
+        "config": {
+          "MACRO": "src/constants/macros.ts"
+        }
+      }
+    ]
+  },
+  "include": ["src/**/*", "packages/**/*.ts", "packages/**/*.tsx", "tests/**/*.ts", "tests/**/*.tsx"],
+  "exclude": ["node_modules", "dist"],
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node",
+    "transpileOnly": true,
+    "compilerOptions": {
+      "module": "NodeNext"
+    }
+  }
+} 

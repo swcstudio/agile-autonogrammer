@@ -1,0 +1,40 @@
+{
+  "name": "@katalyst/security-ai",
+  "version": "1.0.0",
+  "description": "Security-focused AI components for Red Team, Purple Team, and Green Hat initiatives",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest",
+    "lint": "deno lint src/"
+  },
+  "dependencies": {
+    "@katalyst/hooks": "workspace:*",
+    "@katalyst/ai": "workspace:*",
+    "@katalyst/multithreading": "workspace:*",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "zustand": "^5.0.1"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.6.3",
+    "vitest": "^2.0.0"
+  },
+  "keywords": [
+    "security",
+    "ai",
+    "red-team",
+    "purple-team",
+    "green-hat",
+    "vulnerability-scanner",
+    "threat-detection",
+    "ethical-hacking"
+  ],
+  "author": "Katalyst Security Team",
+  "license": "Apache-2.0"
+}

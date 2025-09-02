@@ -1,0 +1,31 @@
+{
+  "name": "@katalyst/desktop",
+  "version": "0.1.0",
+  "private": false,
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "build": "deno task build && tauri build",
+    "dev": "deno task dev",
+    "tauri": "tauri",
+    "lint": "biome check .",
+    "typecheck": "deno check **/*.ts"
+  },
+  "dependencies": {
+    "@katalyst/core": "workspace:*",
+    "@katalyst/design-system": "workspace:*",
+    "@katalyst/multithreading": "workspace:*",
+    "@tauri-apps/api": "^2.0.0",
+    "@tauri-apps/plugin-shell": "^2.0.0",
+    "@tauri-apps/plugin-fs": "^2.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@tauri-apps/cli": "^2.0.0"
+  }
+}

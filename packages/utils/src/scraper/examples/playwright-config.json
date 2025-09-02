@@ -1,0 +1,295 @@
+{
+  "url": ["https://example.com", "https://example.com/products"],
+  "engine": "playwright",
+  "output": {
+    "format": "json",
+    "filePath": "./results/playwright-scraped-data.json",
+    "prettyPrint": true,
+    "includeMetadata": true,
+    "splitFiles": true,
+    "maxFileSize": 52428800
+  },
+  "request": {
+    "timeout": 60000,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "headers": {
+      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+      "Accept-Language": "en-US,en;q=0.9",
+      "Accept-Encoding": "gzip, deflate, br",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "Upgrade-Insecure-Requests": "1"
+    }
+  },
+  "browser": {
+    "type": "chromium",
+    "headless": true,
+    "args": [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage",
+      "--disable-accelerated-2d-canvas",
+      "--no-first-run",
+      "--no-zygote",
+      "--single-process",
+      "--disable-gpu"
+    ],
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "device": "Desktop Chrome",
+    "javascript": true,
+    "loadImages": true,
+    "wait": {
+      "pageLoad": true,
+      "networkIdle": true,
+      "selector": ".content-loaded",
+      "timeout": 30000
+    },
+    "screenshot": {
+      "enabled": true,
+      "format": "png",
+      "fullPage": true,
+      "pathTemplate": "./screenshots/{url}-{timestamp}.png"
+    },
+    "geolocation": {
+      "latitude": 37.7749,
+      "longitude": -122.4194
+    },
+    "timezone": "America/Los_Angeles"
+  },
+  "extraction": {
+    "rules": [
+      {
+        "name": "page_metadata",
+        "selector": "head",
+        "nested": [
+          {
+            "name": "title",
+            "selector": "title",
+            "attribute": "text",
+            "type": "text",
+            "required": true
+          },
+          {
+            "name": "description",
+            "selector": "meta[name=\"description\"]",
+            "attribute": "content",
+            "type": "text"
+          },
+          {
+            "name": "og_title",
+            "selector": "meta[property=\"og:title\"]",
+            "attribute": "content",
+            "type": "text"
+          },
+          {
+            "name": "og_description",
+            "selector": "meta[property=\"og:description\"]",
+            "attribute": "content",
+            "type": "text"
+          },
+          {
+            "name": "og_image",
+            "selector": "meta[property=\"og:image\"]",
+            "attribute": "content",
+            "type": "url"
+          }
+        ]
+      },
+      {
+        "name": "dynamic_content",
+        "selector": ".dynamic-section",
+        "attribute": "text",
+        "type": "text",
+        "required": false,
+        "defaultValue": "No dynamic content found"
+      },
+      {
+        "name": "product_listings",
+        "selector": ".product-card",
+        "multiple": true,
+        "nested": [
+          {
+            "name": "product_name",
+            "selector": ".product-title",
+            "attribute": "text",
+            "type": "text"
+          },
+          {
+            "name": "price",
+            "selector": ".price",
+            "attribute": "text",
+            "type": "text",
+            "transform": [
+              {
+                "type": "regex",
+                "params": {
+                  "pattern": "[^0-9.,]",
+                  "replacement": "",
+                  "flags": "g"
+                }
+              }
+            ]
+          },
+          {
+            "name": "image_url",
+            "selector": ".product-image img",
+            "attribute": "src",
+            "type": "url"
+          },
+          {
+            "name": "product_url",
+            "selector": ".product-link",
+            "attribute": "href",
+            "type": "url"
+          },
+          {
+            "name": "rating",
+            "selector": ".rating",
+            "attribute": "data-rating",
+            "type": "number"
+          },
+          {
+            "name": "availability",
+            "selector": ".availability",
+            "attribute": "text",
+            "type": "boolean",
+            "transform": [
+              {
+                "type": "custom",
+                "params": {
+                  "function": "return value.toLowerCase().includes('in stock')"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "navigation_links",
+        "selector": "nav a[href]",
+        "attribute": "href",
+        "type": "url",
+        "multiple": true
+      },
+      {
+        "name": "social_media_links",
+        "selector": "a[href*=\"facebook.com\"], a[href*=\"twitter.com\"], a[href*=\"instagram.com\"], a[href*=\"linkedin.com\"]",
+        "attribute": "href",
+        "type": "url",
+        "multiple": true
+      },
+      {
+        "name": "lazy_loaded_images",
+        "selector": "img[data-src], img[data-lazy]",
+        "attribute": "data-src",
+        "type": "url",
+        "multiple": true
+      },
+      {
+        "name": "form_fields",
+        "selector": "form input, form textarea, form select",
+        "multiple": true,
+        "nested": [
+          {
+            "name": "field_name",
+            "selector": "self",
+            "attribute": "name",
+            "type": "text"
+          },
+          {
+            "name": "field_type",
+            "selector": "self",
+            "attribute": "type",
+            "type": "text"
+          },
+          {
+            "name": "field_placeholder",
+            "selector": "self",
+            "attribute": "placeholder",
+            "type": "text"
+          },
+          {
+            "name": "field_required",
+            "selector": "self",
+            "attribute": "required",
+            "type": "boolean"
+          }
+        ]
+      }
+    ],
+    "ignoreSelectors": [".advertisement", ".popup", ".cookie-banner", "[data-ad]", ".sponsored"],
+    "textProcessing": {
+      "trim": true,
+      "normalizeWhitespace": true,
+      "stripHtml": false,
+      "decodeEntities": true,
+      "regexReplacements": [
+        {
+          "pattern": "\\s+",
+          "replacement": " ",
+          "flags": "g"
+        },
+        {
+          "pattern": "^\\s+|\\s+$",
+          "replacement": "",
+          "flags": "g"
+        }
+      ]
+    },
+    "pagination": {
+      "enabled": true,
+      "nextPageSelector": ".pagination .next, .load-more",
+      "maxPages": 5,
+      "pageDelay": 2000
+    },
+    "extractLinks": {
+      "enabled": true,
+      "selectors": ["a[href]"],
+      "filters": [".*\\.pdf$", ".*\\.jpg$", ".*\\.png$"],
+      "follow": false,
+      "maxDepth": 1
+    }
+  },
+  "rateLimit": {
+    "delay": 2000,
+    "randomDelay": [1000, 3000],
+    "requestsPerMinute": 20,
+    "burst": 3
+  },
+  "retry": {
+    "maxRetries": 5,
+    "baseDelay": 2000,
+    "backoffMultiplier": 1.5,
+    "maxDelay": 30000,
+    "retryStatusCodes": [408, 429, 500, 502, 503, 504],
+    "retryOnNetworkError": true
+  },
+  "bulk": {
+    "enabled": true,
+    "concurrency": 3,
+    "batchSize": 5,
+    "progress": {
+      "enabled": true,
+      "format": "detailed",
+      "updateInterval": 5000
+    }
+  },
+  "monitoring": {
+    "logLevel": "info",
+    "metrics": true,
+    "metricsExport": {
+      "enabled": true,
+      "format": "json",
+      "interval": 30000,
+      "filePath": "./metrics/scraping-metrics.json"
+    },
+    "errorTracking": {
+      "enabled": true,
+      "errorLogFile": "./logs/scraping-errors.log",
+      "includeStackTrace": true
+    }
+  }
+}

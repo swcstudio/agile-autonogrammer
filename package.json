@@ -1,0 +1,127 @@
+{
+  "name": "agile-programmers",
+  "version": "2.0.0",
+  "private": true,
+  "packageManager": "pnpm@10.14.0",
+  "bin": {
+    "agile": "cli.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "main": "cli.js",
+  "author": "swcstudio <ove@spectrumwebco.com.au>",
+  "license": "Apache-2.0",
+  "description": "AI-powered terminal assistant that understands your codebase, edits files, runs commands, and automates development workflows.",
+  "homepage": "https://github.com/swcstudio/agile-programmers",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shareAI-lab/kode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shareAI-lab/kode/issues"
+  },
+  "files": [
+    "cli.js",
+    "yoga.wasm",
+    "src/**/*",
+    "scripts/postinstall.js",
+    ".npmrc"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "format": "turbo run format",
+    "format:check": "turbo run format:check",
+    "cli:dev": "bun run ./src/entrypoints/cli.tsx --verbose",
+    "cli:build": "bun run scripts/build.ts",
+    "postinstall": "node scripts/postinstall.js || true"
+  },
+  "optionalDependencies": {
+    "@img/sharp-darwin-arm64": "^0.33.5",
+    "@img/sharp-linux-arm": "^0.33.5",
+    "@img/sharp-linux-x64": "^0.33.5",
+    "@img/sharp-win32-x64": "^0.33.5"
+  },
+  "dependencies": {
+    "@anthropic-ai/bedrock-sdk": "^0.12.6",
+    "@anthropic-ai/sdk": "^0.39.0",
+    "@anthropic-ai/vertex-sdk": "^0.7.0",
+    "@commander-js/extra-typings": "^13.1.0",
+    "@inkjs/ui": "^2.0.0",
+    "@modelcontextprotocol/sdk": "^1.15.1",
+    "@statsig/js-client": "^3.18.2",
+    "@types/lodash-es": "^4.17.12",
+    "@types/react": "^19.1.8",
+    "ansi-escapes": "^7.0.0",
+    "chalk": "^5.4.1",
+    "cli-highlight": "^2.1.11",
+    "cli-table3": "^0.6.5",
+    "clipboardy": "^4.0.0",
+    "commander": "^13.1.0",
+    "debug": "^4.4.1",
+    "diff": "^7.0.0",
+    "dotenv": "^16.6.1",
+    "env-paths": "^3.0.0",
+    "figures": "^6.1.0",
+    "glob": "^11.0.3",
+    "gray-matter": "^4.0.3",
+    "highlight.js": "^11.11.1",
+    "ink": "^5.2.1",
+    "ink-link": "^4.1.0",
+    "ink-select-input": "^6.2.0",
+    "ink-text-input": "^6.0.0",
+    "lodash-es": "^4.17.21",
+    "lru-cache": "^11.1.0",
+    "marked": "^15.0.12",
+    "nanoid": "^5.1.5",
+    "node-fetch": "^3.3.2",
+    "node-html-parser": "^7.0.1",
+    "openai": "^4.104.0",
+    "react": "18.3.1",
+    "semver": "^7.7.2",
+    "shell-quote": "^1.8.3",
+    "spawn-rx": "^5.1.2",
+    "tsx": "^4.20.3",
+    "turndown": "^7.2.1",
+    "undici": "^7.11.0",
+    "wrap-ansi": "^9.0.0",
+    "zod": "^3.25.76",
+    "zod-to-json-schema": "^3.24.6"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.1.0",
+    "bun-types": "latest",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.2"
+  },
+  "overrides": {
+    "string-width": "^7.2.0",
+    "strip-ansi": "^7.1.0"
+  },
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "keywords": [
+    "cli",
+    "ai",
+    "assistant",
+    "agent",
+    "kode",
+    "shareai",
+    "terminal",
+    "command-line"
+  ],
+  "workspaces": [
+    "apps/*",
+    "packages/@agile/*",
+    "configs/*"
+  ]
+}

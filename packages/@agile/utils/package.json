@@ -1,0 +1,37 @@
+{
+  "name": "@agile/utils",
+  "version": "0.1.0",
+  "description": "Common utilities and helpers for agile-programmers",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc && tsc-alias",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@agile/types": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.6",
+    "typescript": "^5.3.3",
+    "tsc-alias": "^1.8.8"
+  },
+  "keywords": [
+    "agile",
+    "utils",
+    "logger",
+    "helpers",
+    "debugging"
+  ],
+  "author": "Agile Programmers",
+  "license": "MIT"
+}

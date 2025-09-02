@@ -1,0 +1,443 @@
+{
+  "$schema": "https://schema.tauri.app/config/2.0.0",
+  "productName": "AI-OSX",
+  "version": "1.0.0",
+  "identifier": "com.aiosx.desktop",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "npm run build",
+    "devUrl": "http://localhost:1420",
+    "frontendDist": "../dist"
+  },
+  "bundle": {
+    "active": true,
+    "targets": [
+      {
+        "format": "dmg",
+        "archs": ["x86_64", "aarch64"]
+      },
+      {
+        "format": "msi",
+        "archs": ["x86_64"]
+      },
+      {
+        "format": "appimage",
+        "archs": ["x86_64", "aarch64"]
+      },
+      {
+        "format": "deb",
+        "archs": ["x86_64", "aarch64"]
+      },
+      {
+        "format": "rpm",
+        "archs": ["x86_64", "aarch64"]
+      }
+    ],
+    "category": "DeveloperTool",
+    "shortDescription": "AI-native operating system with Brain-Braun-Beyond architecture",
+    "longDescription": "AI-OSX is a revolutionary cognitive computing platform that integrates advanced AI capabilities with distributed edge computing. Features include real-time cognitive processing, multi-modal AI interactions, and transcendent computational capabilities.",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "resources": ["resources/*"],
+    "copyright": "Copyright © 2024 AI-OSX. All rights reserved.",
+    "homepage": "https://ai-osx.com",
+    "publisher": "AI-OSX Inc.",
+    "createUpdaterArtifacts": true,
+    "sign": {
+      "active": true
+    },
+    "linux": {
+      "deb": {
+        "depends": [
+          "libwebkit2gtk-4.0-37",
+          "libgtk-3-0",
+          "libayatana-appindicator3-1",
+          "libasound2-dev",
+          "libssl-dev",
+          "libxdo3"
+        ],
+        "desktopTemplate": "templates/ai-osx.desktop",
+        "section": "Development"
+      },
+      "rpm": {
+        "depends": [
+          "webkit2gtk3",
+          "gtk3",
+          "libappindicator-gtk3",
+          "alsa-lib-devel",
+          "openssl-devel"
+        ]
+      }
+    },
+    "macOS": {
+      "frameworks": [
+        "WebKit",
+        "Security",
+        "CoreServices",
+        "ApplicationServices",
+        "AppKit",
+        "Foundation",
+        "CoreFoundation",
+        "CoreAudio",
+        "AudioUnit",
+        "AudioToolbox",
+        "CoreMIDI",
+        "IOKit",
+        "Carbon",
+        "Cocoa",
+        "Metal",
+        "MetalKit"
+      ],
+      "minimumSystemVersion": "10.15",
+      "entitlements": "entitlements.plist",
+      "exceptionDomain": "localhost",
+      "signingIdentity": "Developer ID Application"
+    },
+    "windows": {
+      "certificateThumbprint": null,
+      "digestAlgorithm": "sha256",
+      "timestampUrl": "http://timestamp.sectigo.com",
+      "webviewInstallMode": {
+        "type": "downloadBootstrapper"
+      },
+      "allowDowngrades": false,
+      "wix": {
+        "language": ["en-US"],
+        "template": "templates/main.wxs"
+      },
+      "nsis": {
+        "license": "LICENSE",
+        "headerImage": "icons/installer-header.bmp",
+        "sidebarImage": "icons/installer-sidebar.bmp",
+        "installerIcon": "icons/icon.ico",
+        "installMode": "perUser",
+        "languages": ["English"],
+        "displayLanguageSelector": false,
+        "template": "templates/installer.nsi"
+      }
+    }
+  },
+  "app": {
+    "withGlobalTauri": false,
+    "windows": [
+      {
+        "label": "main",
+        "title": "AI-OSX - Brain-Braun-Beyond",
+        "width": 1400,
+        "height": 900,
+        "minWidth": 1200,
+        "minHeight": 800,
+        "center": true,
+        "resizable": true,
+        "maximizable": true,
+        "minimizable": true,
+        "closable": true,
+        "fullscreen": false,
+        "decorations": true,
+        "alwaysOnTop": false,
+        "transparent": false,
+        "visible": true,
+        "titleBarStyle": "Transparent",
+        "theme": "Dark",
+        "hiddenTitle": false,
+        "acceptFirstMouse": false,
+        "tabbing_identifier": "ai-osx-main",
+        "shadow": true,
+        "fileDropEnabled": true,
+        "additionalBrowserArgs": "--enable-features=VaapiVideoDecoder,VaapiVideoEncoder --disable-features=UseChromeOSDirectVideoDecoder"
+      },
+      {
+        "label": "cognitive-monitor",
+        "title": "Cognitive Monitor - Field Resonance",
+        "width": 800,
+        "height": 600,
+        "minWidth": 600,
+        "minHeight": 400,
+        "center": false,
+        "x": 100,
+        "y": 100,
+        "resizable": true,
+        "maximizable": true,
+        "minimizable": true,
+        "closable": true,
+        "visible": false,
+        "skipTaskbar": false,
+        "decorations": true,
+        "transparent": true,
+        "alwaysOnTop": true,
+        "theme": "Dark"
+      },
+      {
+        "label": "terminal",
+        "title": "AI-OSX Terminal - Braun Computing",
+        "width": 1000,
+        "height": 700,
+        "minWidth": 800,
+        "minHeight": 500,
+        "center": false,
+        "resizable": true,
+        "maximizable": true,
+        "minimizable": true,
+        "closable": true,
+        "visible": false,
+        "decorations": true,
+        "theme": "Dark",
+        "additionalBrowserArgs": "--enable-features=WebGPU"
+      }
+    ],
+    "security": {
+      "csp": {
+        "default-src": "'self' 'unsafe-inline' data: blob:",
+        "connect-src": "'self' https: wss: ws: data: blob:",
+        "script-src": "'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://unpkg.com",
+        "style-src": "'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net",
+        "font-src": "'self' https://fonts.gstatic.com https://cdn.jsdelivr.net data:",
+        "img-src": "'self' data: blob: https:",
+        "media-src": "'self' data: blob:",
+        "worker-src": "'self' blob:",
+        "child-src": "'self' blob:"
+      },
+      "dangerousDisableAssetCspModification": false,
+      "assetProtocol": {
+        "enable": true,
+        "scope": {
+          "allow": ["$APPDATA/**", "$RESOURCE/**", "$TEMP/**"],
+          "deny": ["$HOME/**"]
+        }
+      }
+    }
+  },
+  "plugins": {
+    "fs": {
+      "all": false,
+      "readFile": true,
+      "writeFile": true,
+      "readDir": true,
+      "copyFile": true,
+      "createDir": true,
+      "removeDir": true,
+      "removeFile": true,
+      "renameFile": true,
+      "exists": true,
+      "scope": [
+        "$APPDATA/ai-osx/**",
+        "$DOCUMENT/ai-osx/**",
+        "$TEMP/ai-osx/**",
+        "$RESOURCE/**"
+      ]
+    },
+    "shell": {
+      "all": false,
+      "execute": true,
+      "sidecar": true,
+      "open": true,
+      "scope": [
+        {
+          "name": "node",
+          "cmd": "node",
+          "args": true
+        },
+        {
+          "name": "python",
+          "cmd": "python",
+          "args": true
+        },
+        {
+          "name": "rust-analyzer",
+          "cmd": "rust-analyzer",
+          "args": true
+        },
+        {
+          "name": "git",
+          "cmd": "git",
+          "args": true
+        },
+        {
+          "name": "cargo",
+          "cmd": "cargo",
+          "args": true
+        }
+      ]
+    },
+    "dialog": {
+      "all": false,
+      "ask": true,
+      "confirm": true,
+      "message": true,
+      "open": true,
+      "save": true
+    },
+    "notification": {
+      "all": true
+    },
+    "os": {
+      "all": true
+    },
+    "process": {
+      "all": false,
+      "exit": true,
+      "relaunch": true
+    },
+    "updater": {
+      "active": true,
+      "endpoints": [
+        "https://releases.ai-osx.com/{{target}}/{{arch}}/{{current_version}}"
+      ],
+      "dialog": true,
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDJBM0U4RjkzRjdCRjQ4ODAKUldTdWlPWHlrVEZ2TEh0U29XUERKRmpGYVNZaTJlWEF5VjRtRjE5VjlnU05RSlIySUJZS3RjWFMK"
+    },
+    "http": {
+      "all": true,
+      "request": true,
+      "scope": [
+        "https://api.ai-osx.com/**",
+        "https://brain.ai-osx.com/**",
+        "https://braun.ai-osx.com/**",
+        "https://beyond.ai-osx.com/**",
+        "https://edge.ai-osx.com/**",
+        "https://cloudflare.com/**",
+        "https://workers.cloudflare.com/**",
+        "https://api.openai.com/**",
+        "https://api.anthropic.com/**"
+      ]
+    },
+    "store": {
+      "all": true
+    },
+    "window-state": {
+      "all": true
+    }
+  },
+  "tauri": {
+    "allowlist": {
+      "all": false,
+      "shell": {
+        "all": false,
+        "execute": true,
+        "sidecar": true,
+        "open": false
+      },
+      "fs": {
+        "all": false,
+        "readFile": true,
+        "writeFile": true,
+        "readDir": true,
+        "copyFile": true,
+        "createDir": true,
+        "removeDir": true,
+        "removeFile": true,
+        "renameFile": true,
+        "exists": true,
+        "scope": ["$APPDATA/**", "$DOCUMENT/**", "$TEMP/**", "$RESOURCE/**"]
+      },
+      "path": {
+        "all": true
+      },
+      "window": {
+        "all": false,
+        "close": true,
+        "hide": true,
+        "show": true,
+        "maximize": true,
+        "minimize": true,
+        "unmaximize": true,
+        "unminimize": true,
+        "startDragging": true,
+        "setResizable": true,
+        "setTitle": true,
+        "setSize": true,
+        "setMinSize": true,
+        "setMaxSize": true,
+        "setPosition": true,
+        "setFullscreen": true,
+        "setFocus": true,
+        "setIcon": true,
+        "setSkipTaskbar": true,
+        "setCursorGrabbed": true,
+        "setCursorVisible": true,
+        "setCursorIcon": true,
+        "setCursorPosition": true,
+        "setIgnoreCursorEvents": true,
+        "create": true,
+        "center": true
+      },
+      "globalShortcut": {
+        "all": true
+      },
+      "os": {
+        "all": true
+      },
+      "http": {
+        "all": true,
+        "request": true,
+        "scope": [
+          "https://api.ai-osx.com/**",
+          "https://brain.ai-osx.com/**",
+          "https://braun.ai-osx.com/**",
+          "https://beyond.ai-osx.com/**",
+          "https://edge.ai-osx.com/**"
+        ]
+      },
+      "notification": {
+        "all": true
+      },
+      "dialog": {
+        "all": false,
+        "ask": true,
+        "confirm": true,
+        "message": true,
+        "open": true,
+        "save": true
+      },
+      "clipboard": {
+        "all": true,
+        "readText": true,
+        "writeText": true
+      },
+      "process": {
+        "all": false,
+        "relaunch": true,
+        "exit": true
+      }
+    },
+    "systemTray": {
+      "iconPath": "icons/tray-icon.png",
+      "iconAsTemplate": true,
+      "menuOnLeftClick": false,
+      "tooltip": "AI-OSX - Brain-Braun-Beyond Cognitive System"
+    },
+    "macOSPrivateApi": false,
+    "updater": {
+      "active": true,
+      "endpoints": [
+        "https://releases.ai-osx.com/{{target}}/{{arch}}/{{current_version}}"
+      ],
+      "dialog": true,
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDJBM0U4RjkzRjdCRjQ4ODAKUldTdWlPWHlrVEZ2TEh0U29XUERKRmpGYVNZaTJlWEF5VjRtRjE5VjlnU05RSlIySUJZS3RjWFMK"
+    },
+    "windows": [
+      {
+        "title": "AI-OSX",
+        "width": 1400,
+        "height": 900,
+        "resizable": true,
+        "fullscreen": false,
+        "transparent": false,
+        "maximized": false,
+        "visible": true,
+        "decorations": true,
+        "center": true,
+        "minWidth": 1200,
+        "minHeight": 800
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; img-src 'self' asset: https://asset.localhost data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self' asset: https://asset.localhost; connect-src 'self' https: wss: ws:; worker-src 'self' blob:; child-src 'self' blob:;"
+    }
+  }
+}

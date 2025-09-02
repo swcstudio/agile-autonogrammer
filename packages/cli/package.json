@@ -1,0 +1,70 @@
+{
+  "name": "@katalyst/cli",
+  "version": "1.0.0",
+  "description": "CLI tool for creating and managing Katalyst applications",
+  "keywords": [
+    "katalyst",
+    "cli",
+    "create-app",
+    "framework",
+    "scaffold"
+  ],
+  "author": "Katalyst Team",
+  "license": "MIT",
+  "homepage": "https://katalyst.dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/katalyst/framework.git",
+    "directory": "packages/cli"
+  },
+  "bugs": {
+    "url": "https://github.com/katalyst/framework/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "type": "module",
+  "bin": {
+    "katalyst": "./dist/index.js",
+    "create-katalyst-app": "./dist/create.js"
+  },
+  "files": [
+    "dist",
+    "templates",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest",
+    "lint": "eslint src",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^11.1.0",
+    "execa": "^8.0.1",
+    "fs-extra": "^11.2.0",
+    "inquirer": "^9.2.12",
+    "ora": "^7.0.1",
+    "validate-npm-package-name": "^5.0.0",
+    "which": "^4.0.0",
+    "yaml": "^2.3.4",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/inquirer": "^9.0.7",
+    "@types/node": "^20.10.0",
+    "@types/which": "^3.0.3",
+    "eslint": "^8.56.0",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3",
+    "vitest": "^1.1.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

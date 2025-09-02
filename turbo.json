@@ -1,0 +1,127 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": ["**/.env.*local"],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", ".next/**", "cli.js"],
+      "cache": true,
+      "env": [
+        "NODE_ENV",
+        "ANTHROPIC_API_KEY",
+        "OPENAI_API_KEY",
+        "USER_TYPE"
+      ]
+    },
+    "build:wasm": {
+      "dependsOn": ["^build"],
+      "outputs": ["wasm-modules/dist/**"],
+      "cache": true,
+      "inputs": ["wasm-modules/**/*.rs", "wasm-modules/**/*.toml", "scripts/build-*.ts"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "dependsOn": ["^build"]
+    },
+    "dev:wasm": {
+      "persistent": true,
+      "cache": false,
+      "dependsOn": ["build:wasm"]
+    },
+    "test": {
+      "dependsOn": ["build"],
+      "outputs": ["coverage/**"],
+      "cache": true,
+      "inputs": ["src/**", "test/**", "*.test.ts", "*.test.tsx"]
+    },
+    "test:hooks": {
+      "dependsOn": ["build"],
+      "outputs": ["coverage/hooks/**"],
+      "cache": true,
+      "inputs": ["packages/hooks/**/*.ts", "packages/hooks/**/*.tsx", "tests/hooks/**/*.test.ts"]
+    },
+    "test:wasm": {
+      "dependsOn": ["build", "build:wasm"],
+      "outputs": ["coverage/wasm/**"],
+      "cache": true,
+      "inputs": ["packages/@agile/wasm-*/**/*.ts", "packages/@agile/wasm-*/**/*.test.ts"]
+    },
+    "test:ai": {
+      "dependsOn": ["build"],
+      "outputs": ["coverage/ai/**"],
+      "cache": true,
+      "inputs": ["packages/@agile/ai-*/**/*.ts", "packages/@agile/ai-*/**/*.test.ts", "tests/**/*.test.ts"]
+    },
+    "test:security": {
+      "dependsOn": ["build"],
+      "outputs": ["coverage/security/**"],
+      "cache": true,
+      "inputs": ["packages/@agile/ai-security/**/*.ts", "packages/@agile/ai-security/tests/**/*.test.ts"]
+    },
+    "bench:ai": {
+      "dependsOn": ["build"],
+      "outputs": ["benchmark-results/ai/**"],
+      "cache": false,
+      "inputs": ["packages/@agile/ai-*/**/*.bench.ts"]
+    },
+    "bench:wasm": {
+      "dependsOn": ["build", "build:wasm"],
+      "outputs": ["benchmark-results/**"],
+      "cache": false,
+      "inputs": ["packages/@agile/wasm-*/**/*.bench.ts"]
+    },
+    "build:rust-wasm": {
+      "dependsOn": ["^build"],
+      "outputs": ["wasm-modules/rust-core-wasm/pkg/**", "packages/@agile/wasm-rust/wasm/**"],
+      "cache": true,
+      "inputs": ["wasm-modules/rust-core-wasm/**/*.rs", "wasm-modules/rust-core-wasm/Cargo.toml"]
+    },
+    "build:elixir-wasm": {
+      "dependsOn": ["^build"],
+      "outputs": ["wasm-modules/elixir-runtime-wasm/dist/**", "packages/@agile/wasm-elixir/wasm/**"],
+      "cache": true,
+      "inputs": ["wasm-modules/elixir-runtime-wasm/**/*.ex", "wasm-modules/elixir-runtime-wasm/mix.exs"]
+    },
+    "build:typescript-wasm": {
+      "dependsOn": ["^build"],
+      "outputs": ["packages/@agile/wasm-typescript/dist/**"],
+      "cache": true,
+      "inputs": ["packages/@agile/wasm-typescript/**/*.ts", "scripts/build-deno-wasm.ts"]
+    },
+    "lint": {
+      "outputs": [],
+      "cache": true,
+      "inputs": ["src/**", "*.ts", "*.tsx", "*.js", "*.jsx"]
+    },
+    "typecheck": {
+      "dependsOn": ["^build"],
+      "outputs": [],
+      "cache": true
+    },
+    "clean": {
+      "cache": false
+    },
+    "format": {
+      "outputs": [],
+      "cache": false
+    },
+    "format:check": {
+      "outputs": [],
+      "cache": true
+    }
+  },
+  "globalEnv": [
+    "CI",
+    "NODE_ENV",
+    "ANTHROPIC_API_KEY",
+    "OPENAI_API_KEY",
+    "GOOGLE_AI_API_KEY",
+    "HUGGINGFACE_API_KEY",
+    "COHERE_API_KEY",
+    "TOGETHER_API_KEY",
+    "LLAMA_GUARD_ENDPOINT",
+    "USER_TYPE",
+    "SENTRY_DSN"
+  ]
+}

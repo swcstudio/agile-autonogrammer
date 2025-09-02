@@ -1,0 +1,293 @@
+{
+  "url": "https://docs.anthropic.com/en/home",
+  "engine": "playwright",
+  "output": {
+    "format": "json",
+    "filePath": "./results/anthropic-docs-crawl.json",
+    "prettyPrint": true,
+    "includeMetadata": true,
+    "splitFiles": true,
+    "maxFileSize": 104857600
+  },
+  "request": {
+    "timeout": 45000,
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "headers": {
+      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
+      "Accept-Language": "en-US,en;q=0.9",
+      "Accept-Encoding": "gzip, deflate, br",
+      "DNT": "1",
+      "Connection": "keep-alive",
+      "Upgrade-Insecure-Requests": "1",
+      "Sec-Fetch-Dest": "document",
+      "Sec-Fetch-Mode": "navigate",
+      "Sec-Fetch-Site": "none"
+    }
+  },
+  "browser": {
+    "type": "chromium",
+    "headless": true,
+    "args": [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage",
+      "--disable-accelerated-2d-canvas",
+      "--no-first-run",
+      "--no-zygote",
+      "--disable-gpu",
+      "--disable-background-timer-throttling",
+      "--disable-backgrounding-occluded-windows",
+      "--disable-renderer-backgrounding",
+      "--disable-features=TranslateUI",
+      "--disable-web-security"
+    ],
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "javascript": true,
+    "loadImages": false,
+    "wait": {
+      "pageLoad": true,
+      "networkIdle": true,
+      "selector": "main, [data-testid='main-content'], .content, article",
+      "timeout": 30000,
+      "customWait": "() => document.readyState === 'complete' && document.querySelector('main, [data-testid=\"main-content\"], .content, article') !== null"
+    },
+    "screenshot": {
+      "enabled": false,
+      "format": "png",
+      "fullPage": false
+    }
+  },
+  "extraction": {
+    "rules": [
+      {
+        "name": "page_metadata",
+        "selector": "head",
+        "nested": [
+          {
+            "name": "title",
+            "selector": "title",
+            "attribute": "text",
+            "type": "text",
+            "required": true
+          },
+          {
+            "name": "description",
+            "selector": "meta[name='description']",
+            "attribute": "content",
+            "type": "text"
+          },
+          {
+            "name": "canonical_url",
+            "selector": "link[rel='canonical']",
+            "attribute": "href",
+            "type": "url"
+          },
+          {
+            "name": "og_title",
+            "selector": "meta[property='og:title']",
+            "attribute": "content",
+            "type": "text"
+          },
+          {
+            "name": "og_description",
+            "selector": "meta[property='og:description']",
+            "attribute": "content",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "name": "main_content",
+        "selector": "main, [data-testid='main-content'], .content, article, .docs-content",
+        "attribute": "text",
+        "type": "text"
+      },
+      {
+        "name": "headings",
+        "selector": "h1, h2, h3, h4, h5, h6",
+        "attribute": "text",
+        "type": "text",
+        "multiple": true
+      },
+      {
+        "name": "navigation_links",
+        "selector": "nav a[href], .nav a[href], .navigation a[href], .sidebar a[href], .toc a[href]",
+        "attribute": "href",
+        "type": "url",
+        "multiple": true
+      },
+      {
+        "name": "internal_links",
+        "selector": "a[href^='/'], a[href*='docs.anthropic.com']",
+        "attribute": "href",
+        "type": "url",
+        "multiple": true
+      },
+      {
+        "name": "code_blocks",
+        "selector": "pre code, .code-block, .highlight pre, .language-",
+        "attribute": "text",
+        "type": "text",
+        "multiple": true
+      },
+      {
+        "name": "api_endpoints",
+        "selector": "[data-method], .api-method, .endpoint",
+        "multiple": true,
+        "nested": [
+          {
+            "name": "method",
+            "selector": ".method, [data-method]",
+            "attribute": "text",
+            "type": "text"
+          },
+          {
+            "name": "path",
+            "selector": ".path, .endpoint-path",
+            "attribute": "text",
+            "type": "text"
+          },
+          {
+            "name": "description",
+            "selector": ".description, .endpoint-description",
+            "attribute": "text",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "name": "breadcrumbs",
+        "selector": ".breadcrumb, .breadcrumbs, [aria-label='breadcrumb']",
+        "attribute": "text",
+        "type": "text"
+      },
+      {
+        "name": "page_type",
+        "selector": "body",
+        "attribute": "class",
+        "type": "text"
+      },
+      {
+        "name": "tables",
+        "selector": "table",
+        "multiple": true,
+        "nested": [
+          {
+            "name": "headers",
+            "selector": "th",
+            "attribute": "text",
+            "type": "text",
+            "multiple": true
+          },
+          {
+            "name": "rows",
+            "selector": "tr td",
+            "attribute": "text",
+            "type": "text",
+            "multiple": true
+          }
+        ]
+      },
+      {
+        "name": "callouts",
+        "selector": ".callout, .note, .warning, .info, .tip, .alert",
+        "attribute": "text",
+        "type": "text",
+        "multiple": true
+      }
+    ],
+    "ignoreSelectors": [
+      ".advertisement",
+      ".ad",
+      ".banner",
+      ".cookie-banner",
+      ".popup",
+      ".modal",
+      ".overlay",
+      "[data-ad]",
+      ".sponsored",
+      "script",
+      "style",
+      "noscript"
+    ],
+    "textProcessing": {
+      "trim": true,
+      "normalizeWhitespace": true,
+      "stripHtml": false,
+      "decodeEntities": true,
+      "regexReplacements": [
+        {
+          "pattern": "\\s+",
+          "replacement": " ",
+          "flags": "g"
+        },
+        {
+          "pattern": "^\\s+|\\s+$",
+          "replacement": "",
+          "flags": "g"
+        }
+      ]
+    },
+    "extractLinks": {
+      "enabled": true,
+      "selectors": ["a[href^='/']", "a[href*='docs.anthropic.com']"],
+      "filters": [
+        ".*\\.(pdf|doc|docx|xls|xlsx|ppt|pptx)$",
+        ".*\\.(jpg|jpeg|png|gif|svg|webp)$",
+        ".*\\.(mp4|avi|mov|wmv|flv)$",
+        ".*\\.(zip|rar|tar|gz)$",
+        "mailto:",
+        "tel:",
+        "javascript:",
+        "#"
+      ],
+      "follow": true,
+      "maxDepth": 3
+    }
+  },
+  "rateLimit": {
+    "delay": 2000,
+    "randomDelay": [1500, 3000],
+    "requestsPerMinute": 15,
+    "requestsPerSecond": 1,
+    "burst": 2
+  },
+  "retry": {
+    "maxRetries": 3,
+    "baseDelay": 2000,
+    "backoffMultiplier": 1.5,
+    "maxDelay": 10000,
+    "retryStatusCodes": [408, 429, 500, 502, 503, 504, 520, 521, 522, 523, 524],
+    "retryOnNetworkError": true
+  },
+  "bulk": {
+    "enabled": true,
+    "concurrency": 2,
+    "batchSize": 5,
+    "progress": {
+      "enabled": true,
+      "format": "detailed",
+      "updateInterval": 3000,
+      "saveToFile": "./progress/anthropic-crawl-progress.json"
+    }
+  },
+  "monitoring": {
+    "logLevel": "info",
+    "logFile": "./logs/anthropic-crawl.log",
+    "metrics": true,
+    "metricsExport": {
+      "enabled": true,
+      "format": "json",
+      "interval": 30000,
+      "filePath": "./metrics/anthropic-crawl-metrics.json"
+    },
+    "errorTracking": {
+      "enabled": true,
+      "errorLogFile": "./logs/anthropic-crawl-errors.log",
+      "includeStackTrace": true
+    }
+  }
+}

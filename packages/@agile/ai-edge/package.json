@@ -1,0 +1,59 @@
+{
+  "name": "@agile/ai-edge",
+  "version": "1.0.0",
+  "description": "Edge deployment system for <50ms global AI inference latency",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "test:coverage": "vitest --coverage",
+    "bench": "vitest bench --run",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix"
+  },
+  "dependencies": {
+    "@agile/core": "workspace:*",
+    "@agile/ai-core": "workspace:*",
+    "@agile/ai-wasm": "workspace:*",
+    "@agile/ai-security": "workspace:*",
+    "eventemitter3": "^5.0.1",
+    "zod": "^3.22.4",
+    "uuid": "^9.0.1",
+    "@cloudflare/workers-types": "^4.20231025.0",
+    "geoip-lite": "^1.4.10"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.4",
+    "@types/uuid": "^9.0.7",
+    "@types/geoip-lite": "^1.4.4",
+    "typescript": "^5.3.3",
+    "vitest": "^1.0.4",
+    "tsup": "^8.0.1",
+    "@vitest/coverage-v8": "^1.0.4",
+    "eslint": "^8.56.0",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "msw": "^2.0.11"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0"
+  },
+  "keywords": [
+    "ai",
+    "edge-computing",
+    "cdn",
+    "latency-optimization",
+    "global-distribution",
+    "performance",
+    "caching",
+    "react-hooks",
+    "inference"
+  ],
+  "author": "Agile Programmers",
+  "license": "MIT"
+}

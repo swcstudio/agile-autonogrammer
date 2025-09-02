@@ -1,0 +1,24 @@
+{
+  "name": "@katalyst/utils",
+  "version": "0.1.0",
+  "private": false,
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./scraper": "./src/scraper/index.ts",
+    "./plugins": "./src/plugins/index.ts"
+  },
+  "scripts": {
+    "build": "deno task build",
+    "dev": "deno task dev",
+    "lint": "biome check .",
+    "typecheck": "deno check **/*.ts"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "playwright": "^1.40.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0"
+  }
+}

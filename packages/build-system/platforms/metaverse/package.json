@@ -1,0 +1,40 @@
+{
+  "name": "@katalyst/metaverse",
+  "version": "0.1.0",
+  "private": false,
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "build": "deno task build && wasm-pack build",
+    "dev": "deno task dev",
+    "lint": "biome check .",
+    "typecheck": "deno check **/*.ts"
+  },
+  "dependencies": {
+    "@katalyst/core": "workspace:*",
+    "@katalyst/design-system": "workspace:*",
+    "@katalyst/hooks": "workspace:*",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "three": "^0.160.0",
+    "@react-three/fiber": "^8.15.0",
+    "@react-three/drei": "^9.92.0",
+    "@react-three/xr": "^5.1.0",
+    "@react-three/rapier": "^1.2.1",
+    "rapier3d": "^0.12.0",
+    "aframe": "^1.5.0",
+    "@babylonjs/core": "^6.40.0",
+    "webxr-polyfill": "^2.0.3",
+    "simplepeer": "^9.11.1",
+    "socket.io-client": "^4.6.0",
+    "tone": "^14.7.77"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@types/three": "^0.160.0",
+    "wasm-pack": "^0.12.0"
+  }
+}

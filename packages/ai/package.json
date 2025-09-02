@@ -1,0 +1,64 @@
+{
+  "name": "@katalyst/ai",
+  "version": "1.0.0",
+  "description": "Production-ready AI agents with Claude Code Max integration",
+  "private": false,
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./agents": {
+      "import": "./dist/agents/index.mjs",
+      "require": "./dist/agents/index.js",
+      "types": "./dist/agents/index.d.ts"
+    },
+    "./threads": {
+      "import": "./dist/threads/index.mjs",
+      "require": "./dist/threads/index.js",
+      "types": "./dist/threads/index.d.ts"
+    },
+    "./claude": {
+      "import": "./dist/claude/index.mjs",
+      "require": "./dist/claude/index.js",
+      "types": "./dist/claude/index.d.ts"
+    },
+    "./auth": {
+      "import": "./dist/auth/index.mjs",
+      "require": "./dist/auth/index.js",
+      "types": "./dist/auth/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest",
+    "lint": "biome check .",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@katalyst/core": "workspace:*",
+    "@katalyst/multithreading": "workspace:*",
+    "@anthropic-ai/sdk": "^0.20.0",
+    "openai": "^4.0.0",
+    "langchain": "^0.1.0",
+    "zod": "^3.0.0",
+    "react": "^19.0.0",
+    "google-auth-library": "^9.6.0",
+    "open": "^10.0.3",
+    "keytar": "^7.9.0",
+    "ws": "^8.16.0",
+    "uuid": "^9.0.1",
+    "events": "^3.3.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/node": "^20.11.0",
+    "@types/uuid": "^9.0.8",
+    "@types/ws": "^8.5.10"
+  }
+}

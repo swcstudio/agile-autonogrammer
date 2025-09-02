@@ -1,0 +1,260 @@
+# AI-OSX Distributed Computing Worker Configuration
+name = "ai-osx-brain-braun-beyond"
+main = "src/context/distributed/worker.ts"
+compatibility_date = "2024-01-15"
+compatibility_flags = ["nodejs_compat"]
+send_metrics = true
+
+# Worker configuration
+[env.production]
+name = "ai-osx-production"
+vars = { EDGE_REGION = "auto", PROCESSING_TIER = "premium", MAX_COMPUTE_UNITS = "1000" }
+
+[env.staging]
+name = "ai-osx-staging" 
+vars = { EDGE_REGION = "auto", PROCESSING_TIER = "standard", MAX_COMPUTE_UNITS = "500" }
+
+[env.development]
+name = "ai-osx-dev"
+vars = { EDGE_REGION = "auto", PROCESSING_TIER = "basic", MAX_COMPUTE_UNITS = "100" }
+
+# AI Model bindings
+[ai]
+binding = "AI"
+
+# KV Namespaces for caching and state management
+[[kv_namespaces]]
+binding = "AI_CONTEXT_CACHE"
+id = "ai-context-cache-production"
+preview_id = "ai-context-cache-preview"
+
+[[kv_namespaces]]
+binding = "BRAIN_STATE_STORE"
+id = "brain-state-production"
+preview_id = "brain-state-preview"
+
+[[kv_namespaces]]
+binding = "BEYOND_FIELD_DATA"
+id = "beyond-field-production"
+preview_id = "beyond-field-preview"
+
+# R2 Storage for AI models and artifacts
+[[r2_buckets]]
+binding = "AI_MODEL_STORAGE"
+bucket_name = "ai-osx-models"
+
+[[r2_buckets]]
+binding = "COGNITIVE_ARTIFACTS"
+bucket_name = "ai-osx-cognitive-artifacts"
+
+[[r2_buckets]]
+binding = "PROCESSING_RESULTS"
+bucket_name = "ai-osx-results"
+
+# D1 Databases for analytics and sessions
+[[d1_databases]]
+binding = "ANALYTICS_DB"
+database_name = "ai-osx-analytics"
+database_id = "analytics-db-uuid"
+
+[[d1_databases]]
+binding = "SESSION_DB"
+database_name = "ai-osx-sessions"
+database_id = "sessions-db-uuid"
+
+# Vectorize for embeddings and context
+[[vectorize]]
+binding = "CONTEXT_VECTORS"
+index_name = "ai-osx-context"
+dimensions = 1536
+metric = "cosine"
+
+[[vectorize]]
+binding = "COGNITIVE_EMBEDDINGS"
+index_name = "ai-osx-cognitive"
+dimensions = 768
+metric = "euclidean"
+
+# Queues for distributed processing
+[[queues]]
+binding = "BRAIN_PROCESSING_QUEUE"
+queue_name = "brain-processing"
+max_batch_size = 10
+max_batch_timeout = 30
+max_retries = 3
+dead_letter_queue = "brain-processing-dlq"
+
+[[queues]]
+binding = "BRAUN_COMPUTE_QUEUE"
+queue_name = "braun-compute"
+max_batch_size = 5
+max_batch_timeout = 60
+max_retries = 5
+dead_letter_queue = "braun-compute-dlq"
+
+[[queues]]
+binding = "BEYOND_TRANSCENDENCE_QUEUE"
+queue_name = "beyond-transcendence"
+max_batch_size = 3
+max_batch_timeout = 120
+max_retries = 2
+dead_letter_queue = "beyond-transcendence-dlq"
+
+# Durable Objects for stateful processing
+[[durable_objects.bindings]]
+name = "COGNITIVE_COORDINATOR"
+class_name = "CognitiveCoordinator"
+
+[[durable_objects.bindings]]
+name = "FIELD_RESONANCE_MANAGER"
+class_name = "FieldResonanceManager"
+
+[[migrations]]
+tag = "v1"
+new_classes = ["FieldResonanceManager"]
+
+# Analytics Engine for metrics
+[[analytics_engine_datasets]]
+binding = "PERFORMANCE_METRICS"
+dataset = "ai-osx-performance"
+
+[[analytics_engine_datasets]]
+binding = "USAGE_ANALYTICS"
+dataset = "ai-osx-usage"
+
+# Scheduled events for maintenance
+[triggers]
+crons = [
+  "*/5 * * * *",  # Every 5 minutes - maintenance tasks
+  "0 * * * *",    # Every hour - resource optimization
+  "0 0 * * *"     # Daily - report generation
+]
+
+# Resource limits
+[limits]
+cpu_ms = 30000        # 30 second CPU time limit
+memory_mb = 256       # 256MB memory limit
+
+# Build configuration
+[build]
+command = "npm run build"
+cwd = "src/context/distributed"
+watch_dir = "src"
+
+[build.upload]
+format = "modules"
+dir = "dist"
+main = "./worker.js"
+
+# Development configuration
+[dev]
+ip = "127.0.0.1"
+port = 8787
+local_protocol = "https"
+upstream_protocol = "https"
+
+# Environment-specific overrides
+[env.production.vars]
+LOG_LEVEL = "info"
+ENABLE_DEBUG = "false"
+RATE_LIMIT_REQUESTS = "1000"
+CACHE_TTL = "3600"
+
+[env.staging.vars]
+LOG_LEVEL = "debug"
+ENABLE_DEBUG = "true"
+RATE_LIMIT_REQUESTS = "500"
+CACHE_TTL = "1800"
+
+[env.development.vars]
+LOG_LEVEL = "debug"
+ENABLE_DEBUG = "true"
+RATE_LIMIT_REQUESTS = "100"
+CACHE_TTL = "300"
+
+# Production KV Namespaces
+[env.production.kv_namespaces]
+AI_CONTEXT_CACHE = { id = "prod-ai-context-cache" }
+BRAIN_STATE_STORE = { id = "prod-brain-state-store" }
+BEYOND_FIELD_DATA = { id = "prod-beyond-field-data" }
+
+# Production R2 Buckets
+[env.production.r2_buckets]
+AI_MODEL_STORAGE = { bucket_name = "ai-osx-models-prod" }
+COGNITIVE_ARTIFACTS = { bucket_name = "ai-osx-artifacts-prod" }
+PROCESSING_RESULTS = { bucket_name = "ai-osx-results-prod" }
+
+# Production D1 Databases
+[env.production.d1_databases]
+ANALYTICS_DB = { database_name = "ai-osx-analytics-prod", database_id = "prod-analytics-uuid" }
+SESSION_DB = { database_name = "ai-osx-sessions-prod", database_id = "prod-sessions-uuid" }
+
+# Production Vectorize
+[env.production.vectorize]
+CONTEXT_VECTORS = { index_name = "ai-osx-context-prod" }
+COGNITIVE_EMBEDDINGS = { index_name = "ai-osx-cognitive-prod" }
+
+# Production Queues
+[env.production.queues]
+BRAIN_PROCESSING_QUEUE = { queue_name = "brain-processing-prod" }
+BRAUN_COMPUTE_QUEUE = { queue_name = "braun-compute-prod" }
+BEYOND_TRANSCENDENCE_QUEUE = { queue_name = "beyond-transcendence-prod" }
+
+# Staging configuration (similar structure with staging resources)
+[env.staging.kv_namespaces]
+AI_CONTEXT_CACHE = { id = "staging-ai-context-cache" }
+BRAIN_STATE_STORE = { id = "staging-brain-state-store" }
+BEYOND_FIELD_DATA = { id = "staging-beyond-field-data" }
+
+[env.staging.r2_buckets]
+AI_MODEL_STORAGE = { bucket_name = "ai-osx-models-staging" }
+COGNITIVE_ARTIFACTS = { bucket_name = "ai-osx-artifacts-staging" }
+PROCESSING_RESULTS = { bucket_name = "ai-osx-results-staging" }
+
+[env.staging.d1_databases]
+ANALYTICS_DB = { database_name = "ai-osx-analytics-staging", database_id = "staging-analytics-uuid" }
+SESSION_DB = { database_name = "ai-osx-sessions-staging", database_id = "staging-sessions-uuid" }
+
+# Development configuration (local/preview resources)
+[env.development.kv_namespaces]
+AI_CONTEXT_CACHE = { preview_id = "dev-ai-context-cache" }
+BRAIN_STATE_STORE = { preview_id = "dev-brain-state-store" }
+BEYOND_FIELD_DATA = { preview_id = "dev-beyond-field-data" }
+
+# Custom domains
+[env.production]
+routes = [
+  "ai-osx.example.com/*",
+  "brain.ai-osx.example.com/*",
+  "braun.ai-osx.example.com/*",
+  "beyond.ai-osx.example.com/*"
+]
+
+[env.staging]
+routes = [
+  "staging.ai-osx.example.com/*"
+]
+
+# Security configuration
+[[rules]]
+type = "ESModule"
+globs = ["**/*.js", "**/*.ts"]
+
+# Performance optimizations
+[placement]
+mode = "smart"
+
+[observability]
+enabled = true
+
+# Wrangler CLI configuration
+[wrangler]
+send_metrics = true
+compatibility_date = "2024-01-15"
+
+# Environment secrets (set via wrangler secret put)
+# These would be set separately for security:
+# - AI_API_KEY
+# - VECTORIZE_API_KEY
+# - ENCRYPTION_KEY
+# - SESSION_SECRET

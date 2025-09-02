@@ -1,0 +1,38 @@
+{
+  "extends": ["//"],
+  "pipeline": {
+    "build": {
+      "outputs": ["target/**", "index.node", "*.node", "index.js", "index.d.ts"],
+      "inputs": ["src/**/*.rs", "Cargo.toml", "Cargo.lock", "build.rs"],
+      "env": ["RUST_BACKTRACE", "CARGO_*", "NAPI_*", "TARGET", "PROFILE"],
+      "cache": true
+    },
+    "build:debug": {
+      "extends": "build",
+      "env": ["PROFILE=debug"],
+      "outputs": ["target/debug/**"]
+    },
+    "build:release": {
+      "extends": "build",
+      "env": ["PROFILE=release"],
+      "outputs": ["target/release/**"]
+    },
+    "test": {
+      "dependsOn": ["build:debug"],
+      "inputs": ["src/**/*.rs", "tests/**/*.rs"],
+      "outputs": ["target/debug/deps/**"],
+      "cache": true
+    },
+    "bench": {
+      "dependsOn": ["build:release"],
+      "inputs": ["benches/**/*.rs"],
+      "outputs": ["target/release/deps/**"],
+      "cache": false
+    },
+    "publish": {
+      "dependsOn": ["build:release", "test"],
+      "cache": false,
+      "env": ["NPM_TOKEN", "CARGO_REGISTRY_TOKEN"]
+    }
+  }
+}

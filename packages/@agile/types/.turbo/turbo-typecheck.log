@@ -1,0 +1,4 @@
+
+> @agile/types@1.0.0 typecheck /home/ubuntu/src/repos/agile-programmers/packages/@agile/types
+> tsc --noEmit
+

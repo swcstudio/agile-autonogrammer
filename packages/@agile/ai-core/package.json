@@ -1,0 +1,84 @@
+{
+  "name": "@agile/ai-core",
+  "version": "0.0.1",
+  "description": "Core AI/ML integration package with 50+ model support and WASM acceleration",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./hooks": {
+      "import": "./dist/hooks/index.esm.js",
+      "require": "./dist/hooks/index.js",
+      "types": "./dist/hooks/index.d.ts"
+    },
+    "./providers": {
+      "import": "./dist/providers/index.esm.js",
+      "require": "./dist/providers/index.js",
+      "types": "./dist/providers/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest",
+    "test:coverage": "vitest --coverage",
+    "test:ui": "vitest --ui",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --ext .ts,.tsx --fix",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "ai",
+    "ml",
+    "machine-learning",
+    "artificial-intelligence",
+    "claude",
+    "openai",
+    "gemini",
+    "llama",
+    "huggingface",
+    "wasm",
+    "webassembly",
+    "hooks",
+    "react",
+    "inference",
+    "streaming"
+  ],
+  "author": "Agile-Programmers Team",
+  "license": "MIT",
+  "dependencies": {
+    "@agile/core": "workspace:*",
+    "@anthropic-ai/sdk": "^0.20.0",
+    "openai": "^4.28.0",
+    "@google-ai/generativelanguage": "^2.1.0",
+    "@huggingface/inference": "^2.6.4",
+    "react": "^18.2.0 || ^19.0.0",
+    "zod": "^3.22.4",
+    "uuid": "^9.0.1",
+    "eventemitter3": "^5.0.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/uuid": "^9.0.7",
+    "@testing-library/jest-dom": "^6.1.4",
+    "@vitest/coverage-v8": "^1.2.0",
+    "@vitest/ui": "^1.2.0",
+    "eslint": "^8.57.0",
+    "jsdom": "^23.0.1",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3",
+    "vitest": "^1.2.0"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
