@@ -49,7 +49,6 @@
     "@agile/ai-edge": "workspace:*",
     "@agile/ai-security": "workspace:*",
     "@agile/ai-wasm": "workspace:*",
-    "@agile/execution-engine": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "zustand": "^4.4.7",

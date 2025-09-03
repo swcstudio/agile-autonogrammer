@@ -1,24 +1,32 @@
 {
-  "buildCommand": "node build-fallback.js",
-  "installCommand": "npm install -g pnpm@10.14.0 || echo 'pnpm install failed, will try alternatives'",
+  "buildCommand": "echo 'Using static HTML - no build needed'",
+  "installCommand": "echo 'Static site - no install needed'",
   "framework": null,
-  "outputDirectory": "./dist",
-  "env": {
-    "NODE_VERSION": "18.17.0",
-    "NPM_CONFIG_REGISTRY": "https://registry.npmjs.org/",
-    "NPM_CONFIG_FETCH_TIMEOUT": "60000",
-    "NPM_CONFIG_FETCH_RETRY_MINTIMEOUT": "10000",
-    "NPM_CONFIG_FETCH_RETRY_MAXTIMEOUT": "60000"
-  },
+  "outputDirectory": ".",
+  "cleanUrls": true,
+  "trailingSlash": false,
   "functions": {
-    "api/**/*.ts": {
+    "api/**/*.js": {
       "runtime": "nodejs18.x"
     }
   },
-  "rewrites": [
+  "headers": [
     {
-      "source": "/api/(.*)",
-      "destination": "/api/$1"
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
     }
   ]
 }
