@@ -1,0 +1,24 @@
+{
+  "buildCommand": "node build-fallback.js",
+  "installCommand": "npm install -g pnpm@10.14.0 || echo 'pnpm install failed, will try alternatives'",
+  "framework": null,
+  "outputDirectory": "./dist",
+  "env": {
+    "NODE_VERSION": "18.17.0",
+    "NPM_CONFIG_REGISTRY": "https://registry.npmjs.org/",
+    "NPM_CONFIG_FETCH_TIMEOUT": "60000",
+    "NPM_CONFIG_FETCH_RETRY_MINTIMEOUT": "10000",
+    "NPM_CONFIG_FETCH_RETRY_MAXTIMEOUT": "60000"
+  },
+  "functions": {
+    "api/**/*.ts": {
+      "runtime": "nodejs18.x"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    }
+  ]
+}

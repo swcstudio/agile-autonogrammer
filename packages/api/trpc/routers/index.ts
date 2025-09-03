@@ -5,6 +5,7 @@ import { userRouter } from './user';
 import { postRouter } from './post';
 import { aiRouter } from './ai';
 import { analyticsRouter } from './analytics';
+import { agentRouter } from './agents';
 
 // New comprehensive routers
 import { authRouter } from './auth';
@@ -37,6 +38,7 @@ export const appRouter = router({
   
   // AI & Analytics
   ai: aiRouter,
+  agents: agentRouter,
   analytics: analyticsRouter,
 });
 
