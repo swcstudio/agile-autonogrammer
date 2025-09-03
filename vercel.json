@@ -1,15 +1,9 @@
 {
-  "buildCommand": "echo 'Using static HTML - no build needed'",
-  "installCommand": "echo 'Static site - no install needed'",
+  "buildCommand": "echo 'Static site deployment'",
+  "installCommand": "echo 'No dependencies needed'",
   "framework": null,
-  "outputDirectory": ".",
   "cleanUrls": true,
   "trailingSlash": false,
-  "functions": {
-    "api/**/*.js": {
-      "runtime": "@vercel/node@3.0.7"
-    }
-  },
   "headers": [
     {
       "source": "/(.*)",
