@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Dashboard - Created with 21st.dev Magic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-4">
+                    <div class="gradient-bg p-2 rounded-lg">
+                        <i data-lucide="layout-dashboard" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <h1 class="text-xl font-semibold text-gray-900">Dashboard</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100">
+                        <i data-lucide="bell" class="w-5 h-5"></i>
+                    </button>
+                    <button class="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100">
+                        <i data-lucide="settings" class="w-5 h-5"></i>
+                    </button>
+                    <div class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center">
+                        <span class="text-white text-sm font-medium">AI</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-xl shadow-sm card-hover border border-gray-100">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 text-sm font-medium">Total Users</p>
+                        <p class="text-3xl font-bold text-gray-900">12,543</p>
+                        <p class="text-green-600 text-sm font-medium">+12% from last month</p>
+                    </div>
+                    <div class="bg-blue-100 p-3 rounded-lg">
+                        <i data-lucide="users" class="w-6 h-6 text-blue-600"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-sm card-hover border border-gray-100">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 text-sm font-medium">Revenue</p>
+                        <p class="text-3xl font-bold text-gray-900">$45,210</p>
+                        <p class="text-green-600 text-sm font-medium">+8% from last month</p>
+                    </div>
+                    <div class="bg-green-100 p-3 rounded-lg">
+                        <i data-lucide="dollar-sign" class="w-6 h-6 text-green-600"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-sm card-hover border border-gray-100">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 text-sm font-medium">Projects</p>
+                        <p class="text-3xl font-bold text-gray-900">156</p>
+                        <p class="text-yellow-600 text-sm font-medium">+3% from last month</p>
+                    </div>
+                    <div class="bg-yellow-100 p-3 rounded-lg">
+                        <i data-lucide="folder" class="w-6 h-6 text-yellow-600"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-sm card-hover border border-gray-100">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 text-sm font-medium">Tasks</p>
+                        <p class="text-3xl font-bold text-gray-900">89</p>
+                        <p class="text-red-600 text-sm font-medium">-2% from last month</p>
+                    </div>
+                    <div class="bg-purple-100 p-3 rounded-lg">
+                        <i data-lucide="check-circle" class="w-6 h-6 text-purple-600"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <!-- Analytics Chart -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-lg font-semibold text-gray-900">Analytics Overview</h3>
+                    <button class="text-gray-400 hover:text-gray-600">
+                        <i data-lucide="more-horizontal" class="w-5 h-5"></i>
+                    </button>
+                </div>
+                <div class="h-64 flex items-center justify-center bg-gray-50 rounded-lg">
+                    <div class="text-center">
+                        <i data-lucide="bar-chart-3" class="w-16 h-16 text-gray-400 mx-auto mb-2"></i>
+                        <p class="text-gray-500">Chart Component</p>
+                        <p class="text-sm text-gray-400">Integration with Chart.js or similar</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-lg font-semibold text-gray-900">Recent Activity</h3>
+                    <button class="text-sm text-blue-600 hover:text-blue-700 font-medium">View all</button>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                            <i data-lucide="plus" class="w-4 h-4 text-blue-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-gray-900">New project created</p>
+                            <p class="text-xs text-gray-500">2 minutes ago</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                            <i data-lucide="check" class="w-4 h-4 text-green-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-gray-900">Task completed</p>
+                            <p class="text-xs text-gray-500">5 minutes ago</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                            <i data-lucide="user" class="w-4 h-4 text-purple-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-gray-900">New team member added</p>
+                            <p class="text-xs text-gray-500">10 minutes ago</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center">
+                            <i data-lucide="message-circle" class="w-4 h-4 text-yellow-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-gray-900">New comment received</p>
+                            <p class="text-xs text-gray-500">15 minutes ago</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects Table -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="px-6 py-4 border-b border-gray-200">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-lg font-semibold text-gray-900">Recent Projects</h3>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors">
+                        <i data-lucide="plus" class="w-4 h-4 mr-2 inline"></i>
+                        New Project
+                    </button>
+                </div>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="text-left px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Project</th>
+                            <th class="text-left px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                            <th class="text-left px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Team</th>
+                            <th class="text-left px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Progress</th>
+                            <th class="text-left px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+                                        <i data-lucide="zap" class="w-5 h-5 text-white"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">AI Dashboard</div>
+                                        <div class="text-sm text-gray-500">Frontend development</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full">Active</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex -space-x-1">
+                                    <div class="w-6 h-6 bg-gray-300 rounded-full border-2 border-white"></div>
+                                    <div class="w-6 h-6 bg-gray-400 rounded-full border-2 border-white"></div>
+                                    <div class="w-6 h-6 bg-gray-500 rounded-full border-2 border-white"></div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-blue-600 h-2 rounded-full" style="width: 75%"></div>
+                                </div>
+                                <span class="text-xs text-gray-500 mt-1">75%</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <button class="text-blue-600 hover:text-blue-700 mr-3">Edit</button>
+                                <button class="text-red-600 hover:text-red-700">Delete</button>
+                            </td>
+                        </tr>
+                        <!-- More rows would be here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- AI-Powered Badge -->
+    <div class="fixed bottom-4 right-4">
+        <div class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full shadow-lg">
+            <div class="flex items-center space-x-2">
+                <i data-lucide="sparkles" class="w-4 h-4"></i>
+                <span class="text-sm font-medium">Created with 21st.dev Magic</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Add some interactivity
+        document.querySelectorAll('.card-hover').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-2px)';
+                card.style.boxShadow = '0 10px 25px rgba(0,0,0,0.1)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+                card.style.boxShadow = '';
+            });
+        });
+
+        // Simulate real-time updates
+        function updateStats() {
+            const stats = document.querySelectorAll('.text-3xl');
+            stats.forEach(stat => {
+                const current = parseInt(stat.textContent.replace(/[,$]/g, ''));
+                const variation = Math.floor(Math.random() * 10) - 5;
+                const newValue = current + variation;
+                if (newValue > 0) {
+                    stat.textContent = newValue.toLocaleString();
+                }
+            });
+        }
+
+        // Update stats every 30 seconds to simulate real-time data
+        setInterval(updateStats, 30000);
+
+        console.log('🎨 This dashboard was created using 21st.dev Magic MCP server!');
+        console.log('🚀 You can generate components like this with natural language prompts.');
+    </script>
+</body>
+</html>
