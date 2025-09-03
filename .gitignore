@@ -189,3 +189,4 @@ cli.mjs
 cli.mjs.map
 source-maps/
 .turbo/
+.vercel
